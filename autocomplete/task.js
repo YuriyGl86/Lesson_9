@@ -72,7 +72,7 @@ class Autocomplete {
     const res = []
     const optionList = Array.from(this.input.options)
     optionList.forEach(elem => {
-      if(elem.innerText.includes(text)){
+      if(elem.innerText.toLowerCase().includes(text.toLowerCase())){
         res.push({
           'text': elem.innerText,
           'value': elem.index
