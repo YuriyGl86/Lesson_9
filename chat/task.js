@@ -17,8 +17,13 @@ function addMessage(message__text, client=false){
     const messages = chat.querySelector( '.chat-widget__messages' );
     const msgContainer = chat.querySelector('.chat-widget__messages-container')
     let time = new Date()
-    let hours = time.getHours()
-    let minutes = time.getMinutes()
+    const pad = '00'
+    // let hours = time.getHours()
+    // let minutes = time.getMinutes()
+    let hours = (pad + time.getHours()).slice(-pad.length)
+    let minutes = (pad + time.getMinutes()).slice(-pad.length)
+
+    // console.log((pad + hours).slice(-pad.length), (pad + minutes).slice(-pad.length))
 
     messages.innerHTML += `
     <div class="message${client? ' message_client':''}">
@@ -39,14 +44,14 @@ input.addEventListener('blur', () => clearTimeout(timer))
 
 function enterHandler(event){   
     if(event.code == 'Enter' || event.code == 'NumpadEnter'){
-        let rand = Math.floor(Math.random() * answList.length)
+        if(input.value.trim()){let rand = Math.floor(Math.random() * answList.length)
         console.log(rand)
 
         addMessage(input.value, true)
         input.value = ''
         addMessage(answList[rand])
         startTimer()
-        
+        }
     }
 }
 
